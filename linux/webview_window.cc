@@ -221,7 +221,7 @@ void WebviewWindow::EvaluateJavaScript(const char *java_script, FlMethodCall *ca
       [](GObject *object, GAsyncResult *result, gpointer user_data) {
         auto *call = static_cast<FlMethodCall *>(user_data);
         GError *error = nullptr;
-        auto *js_result = webkit_web_view_run_javascript_finish(WEBKIT_WEB_VIEW(object), result, &error);
+        auto *js_result = webkit_web_view_evaluate_javascript(WEBKIT_WEB_VIEW(object), result, &error);
         if (!js_result) {
           fl_method_call_respond_error(call, "failed to evaluate javascript.", error->message, nullptr, nullptr);
           g_error_free(error);
